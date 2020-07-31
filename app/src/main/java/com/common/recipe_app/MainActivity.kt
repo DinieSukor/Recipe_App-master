@@ -27,6 +27,7 @@ class MainActivity : AppCompatActivity(),Adapter.OnItemClickLister {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        // Create view by applying adapter to recycle view
         createView()
 
         // Create spinner
@@ -36,7 +37,7 @@ class MainActivity : AppCompatActivity(),Adapter.OnItemClickLister {
 
         spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(p0: AdapterView<*>?) {
-                TODO("Not yet implemented")
+
             }
 
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
@@ -78,50 +79,18 @@ class MainActivity : AppCompatActivity(),Adapter.OnItemClickLister {
             }
 
         }
-        // add fab
+        // add fab and open AddUpdateRecipe
         add_fab.setOnClickListener {
-            val open = Intent(this, AddUpdateRecipe::class.java)
-            startActivity(open)
-
+            val intent = Intent(this, AddUpdateRecipe::class.java)
+            startActivity(intent)
         }
-        // delete
-        // take info from AddUpdateRecipe
-
-        /*
-        val sharedPreferences = getSharedPreferences("NEW_DATA",Context.MODE_PRIVATE)
-        val newTitle = sharedPreferences.getString("NEW_TITLE","")
-        val newType = sharedPreferences.getString("NEW_TYPE","")
-        val newDesc = sharedPreferences.getString("NEW_DESC","")
-        val newIng = sharedPreferences.getString("NEW_ING","")
-        Toast.makeText(this,newDesc,Toast.LENGTH_SHORT).show()
-        //ProvidedRecipeList.add(RecipeData(R.drawable.br_pancake,newTitle,newType,newDesc,newIng))
-        */
-
-
-
-
-
-        /*
-        var bundle = this.intent!!.extras
-
-        var new_title = bundle!!.getString("TITLE").toString()
-        var new_type = bundle!!.getString("TITLE").toString()
-        var new_desc = bundle!!.getString("DESC").toString()
-        var new_ing = bundle!!.getString("ING").toString()
-        //TODO add new for image
-        // create new card of recipe
-        //ProvidedRecipeList.add(RecipeData(0,new_title,new_type,new_desc,new_ing))
-        */
-
-
-
-
-
+        //TODO take info from AddUpdateRecipe and add to ProvidedRecipeList
+        //var addUpdate_sp = getSharedPreferences("FROM_ADDUPDATE",Context.MODE_PRIVATE)
+        //ProvidedRecipeList.add(RecipeData())
 
     }
 
-
-    // created existed recipe (pre-populate data)
+    // created existed recipe (pre-populate data):
     // Breakfast
     fun makeBreakfast(){
 
@@ -160,9 +129,9 @@ class MainActivity : AppCompatActivity(),Adapter.OnItemClickLister {
         recycler_view.setHasFixedSize(true)
     }
 
+    // Open a page of detailed recipe when clicking on the card
     override fun onItemClick(position: Int) {
         val clickedItem = ProvidedRecipeList[position]
-        Toast.makeText(this, "Item $position clicked", Toast.LENGTH_SHORT).show()
         val intent = Intent(this,RecipeDetails::class.java)
         // pass infos to RecipeDetail class
         val sp = getSharedPreferences("INFO_FROM_MAIN",Context.MODE_PRIVATE)
