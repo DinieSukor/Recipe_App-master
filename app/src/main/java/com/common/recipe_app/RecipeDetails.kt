@@ -22,14 +22,13 @@ class RecipeDetails : AppCompatActivity() {
         setContentView(R.layout.activity_recipe_details)
 
         // Take info from MainActivity
-        val sp = getSharedPreferences("INFO_FROM_MAIN",Context.MODE_PRIVATE)
-
-        
+        val sp = getSharedPreferences("INFO_FROM_MAIN",Context.MODE_PRIVATE)     
         imageView.setImageResource(sp.getInt("IMAGE",0))
         rd_title_tv.text = sp.getString("TITLE","")
         rd_type_tv.text = sp.getString("TYPE","")
         Ingredient.text = sp.getString("ING","")
-
+        
+        // Open AddUpdateRecipe to edit recipe
         edit_btn.setOnClickListener {
 
             val intent = Intent(this, AddUpdateRecipe::class.java)
